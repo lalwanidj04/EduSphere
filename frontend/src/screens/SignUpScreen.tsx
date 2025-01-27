@@ -82,6 +82,12 @@ const SignUpScreen = () => {
               secureTextEntry
               placeholderTextColor="#aaa"
             />
+            <TextInput
+              className="w-full h-12 border border-gray-300 rounded-lg px-4 text-gray-800"
+              placeholder="Confirm Password"
+              secureTextEntry
+              placeholderTextColor="#aaa"
+            />
           </View>
 
           {/* Register Button */}

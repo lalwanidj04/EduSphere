@@ -27,6 +27,7 @@ const HomeScreen = ({ navigateTo }) => {
       <View className="relative flex-row items-center justify-center w-full">
         {/* Login Button */}
         <TouchableOpacity
+          onPress={() => navigateTo("Login")}
           className="bg-gray-500 py-6 rounded-full flex-row items-center"
           style={{ width: width * 0.43, marginRight: width * 0.3 }} // Button width is 40% of the screen width
         >
