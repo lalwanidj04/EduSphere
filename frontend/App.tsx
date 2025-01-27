@@ -15,8 +15,8 @@ const App = () => {
     return (
         <>
           {currentScreen === "Home" && <HomeScreen navigateTo={navigateTo} />}
-          {currentScreen === "SignUp" && <SignUpScreen/>}
-          {currentScreen === "Login" && <LoginScreen/>}
+          {currentScreen === "SignUp" && <SignUpScreen navigateTo={navigateTo}/>}
+          {currentScreen === "Login" && <LoginScreen navigateTo={navigateTo}/>}
         </>
     );
     
