@@ -26,7 +26,7 @@ const SignUpScreen = ({ navigateTo }) => {
       >
         {/* Top Image */}
         <Image
-          source={require("../../assets/images/loginScreen.jpg")} // Replace with your actual illustration image
+          source={require("../../assets/images/loginScreen.jpg")}
           style={{
             height: width * 0.7,
             width: width,
@@ -35,73 +35,113 @@ const SignUpScreen = ({ navigateTo }) => {
             zIndex: -1,
           }}
           resizeMode="cover"
+          accessible={true}
+          accessibilityLabel="Background image of the login screen"
         />
 
         {/* Rounded Box */}
         <View
-          className="flex-1 bg-gray-100 rounded-t-3xl shadow-lg px-6 pt-8 pb-6 mt-[50%]"
+          className="flex-1 bg-gray-100 rounded-t-3xl shadow-lg px-6 pt-8 pb-6"
           style={{ marginTop: width * 0.65 }}
+          accessible={true}
         >
           {/* Title Section */}
-          <Text className="text-2xl font-bold text-gray-800 mb-6 text-center">
+          <Text
+            className="text-2xl font-bold text-gray-800 mb-6 text-center"
+            accessibilityRole="header"
+          >
             Create New Account
           </Text>
 
           {/* Social Media Login Options */}
           <View className="flex-row justify-evenly mb-4">
-            <TouchableOpacity className="bg-gray-200 w-12 h-12 rounded-full items-center justify-center shadow">
-                <Text className="text-lg font-bold text-gray-700">F</Text>
+            <TouchableOpacity
+              className="bg-gray-200 w-12 h-12 rounded-full items-center justify-center shadow"
+              accessibilityRole="button"
+              accessibilityLabel="Sign up with Facebook"
+            >
+              <Text className="text-lg font-bold text-gray-700">F</Text>
             </TouchableOpacity>
-            <TouchableOpacity className="bg-gray-200 w-12 h-12 rounded-full items-center justify-center shadow">
-                <Text className="text-lg font-bold text-gray-700">T</Text>
+            <TouchableOpacity
+              className="bg-gray-200 w-12 h-12 rounded-full items-center justify-center shadow"
+              accessibilityRole="button"
+              accessibilityLabel="Sign up with Twitter"
+            >
+              <Text className="text-lg font-bold text-gray-700">T</Text>
             </TouchableOpacity>
-            <TouchableOpacity className="bg-gray-200 w-12 h-12 rounded-full items-center justify-center shadow">
-                <Text className="text-lg font-bold text-gray-700">G</Text>
+            <TouchableOpacity
+              className="bg-gray-200 w-12 h-12 rounded-full items-center justify-center shadow"
+              accessibilityRole="button"
+              accessibilityLabel="Sign up with Google"
+            >
+              <Text className="text-lg font-bold text-gray-700">G</Text>
             </TouchableOpacity>
-        </View>
+          </View>
 
-          <Text className="text-sm text-gray-600 mb-6 text-center">
+          <Text
+            className="text-sm text-gray-600 mb-6 text-center"
+            accessibilityLabel="Or use your email account"
+          >
             or use your email account
           </Text>
 
           {/* Input Fields */}
           <View className="space-y-4 mb-6">
             <TextInput
-              className="w-full h-12 border border-gray-300 rounded-lg px-4 text-gray-800 mb-3"
+              className="w-full h-12 border border-gray-300 rounded-lg px-4 text-gray-800"
               placeholder="Email"
               placeholderTextColor="#aaa"
+              accessibilityLabel="Enter your email"
+              keyboardType="email-address"
             />
             <TextInput
-              className="w-full h-12 border border-gray-300 rounded-lg px-4 text-gray-800 mb-3"
+              className="w-full h-12 border border-gray-300 rounded-lg px-4 text-gray-800"
               placeholder="Name"
               placeholderTextColor="#aaa"
+              accessibilityLabel="Enter your full name"
             />
             <TextInput
               className="w-full h-12 border border-gray-300 rounded-lg px-4 text-gray-800"
               placeholder="Password"
               secureTextEntry
               placeholderTextColor="#aaa"
+              accessibilityLabel="Enter your password"
             />
             <TextInput
               className="w-full h-12 border border-gray-300 rounded-lg px-4 text-gray-800"
               placeholder="Confirm Password"
               secureTextEntry
               placeholderTextColor="#aaa"
+              accessibilityLabel="Confirm your password"
             />
           </View>
 
           {/* Register Button */}
-          <TouchableOpacity className="w-full h-12 bg-green-500 rounded-lg items-center justify-center">
+          <TouchableOpacity
+            className="w-full h-12 bg-green-500 rounded-lg items-center justify-center"
+            accessibilityRole="button"
+            accessibilityLabel="Register your account"
+          >
             <Text className="text-white text-lg font-bold">REGISTER</Text>
           </TouchableOpacity>
 
           {/* Footer */}
           <Text className="text-sm text-gray-600 text-center mt-4">
             Already have an account?{" "}
+<<<<<<< HEAD
             <TouchableOpacity onPress={() => navigateTo("Login")}>
                 <Text className="text-green-500 font-bold">Login</Text>
             </TouchableOpacity>
             
+=======
+            <Text
+              className="text-green-500 font-bold"
+              accessibilityRole="link"
+              accessibilityLabel="Navigate to login screen"
+            >
+              Login here
+            </Text>
+>>>>>>> d6cc3e0 (Updated file with changes added accessibility features)
           </Text>
         </View>
       </ScrollView>

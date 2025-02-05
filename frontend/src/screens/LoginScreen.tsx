@@ -18,6 +18,8 @@ const LoginScreen = ({navigateTo}) => {
     <KeyboardAvoidingView
       className="flex-1"
       behavior={Platform.OS === "ios" ? "padding" : "height"}
+      accessible={true}
+      accessibilityLabel="Login screen"
     >
       <ScrollView
         contentContainerStyle={{ flexGrow: 1 }}
@@ -26,7 +28,7 @@ const LoginScreen = ({navigateTo}) => {
       >
         {/* Top Image */}
         <Image
-          source={require("../../assets/images/loginscreen2.jpg")} // Replace with your actual illustration image
+          source={require("../../assets/images/loginscreen2.jpg")}
           style={{
             height: width * 0.7,
             width: width,
@@ -35,32 +37,60 @@ const LoginScreen = ({navigateTo}) => {
             zIndex: -1,
           }}
           resizeMode="cover"
+          accessible={true}
+          accessibilityLabel="Background image of the login screen"
         />
 
-        {/* Rounded Box */}
+        {/* Main Container */}
         <View
           className="flex-1 bg-gray-100 rounded-t-3xl shadow-lg px-6 pt-8 pb-6 mt-[50%]"
           style={{ marginTop: width * 0.65 }}
+          accessible={true}
+          accessibilityLabel="Login form section"
         >
-          {/* Title Section */}
-          <Text className="text-2xl font-bold text-gray-800 mb-6 text-center">
+          {/* Title */}
+          <Text
+            className="text-2xl font-bold text-gray-800 mb-6 text-center"
+            accessibilityRole="header"
+            accessible={true}
+            accessibilityLabel="Welcome Back!"
+          >
             Welcome Back!
           </Text>
 
           {/* Social Media Login Options */}
-          <View className="flex-row justify-evenly mb-4">
-            <TouchableOpacity className="bg-gray-200 w-12 h-12 rounded-full items-center justify-center shadow">
-                <Text className="text-lg font-bold text-gray-700">F</Text>
+          <View className="flex-row justify-evenly mb-4" accessible={true} accessibilityLabel="Social login options">
+            <TouchableOpacity
+              className="bg-gray-200 w-12 h-12 rounded-full items-center justify-center shadow"
+              accessibilityRole="button"
+              accessible={true}
+              accessibilityLabel="Login with Facebook"
+            >
+              <Text className="text-lg font-bold text-gray-700">F</Text>
             </TouchableOpacity>
-            <TouchableOpacity className="bg-gray-200 w-12 h-12 rounded-full items-center justify-center shadow">
-                <Text className="text-lg font-bold text-gray-700">T</Text>
+            <TouchableOpacity
+              className="bg-gray-200 w-12 h-12 rounded-full items-center justify-center shadow"
+              accessibilityRole="button"
+              accessible={true}
+              accessibilityLabel="Login with Twitter"
+            >
+              <Text className="text-lg font-bold text-gray-700">T</Text>
             </TouchableOpacity>
-            <TouchableOpacity className="bg-gray-200 w-12 h-12 rounded-full items-center justify-center shadow">
-                <Text className="text-lg font-bold text-gray-700">G</Text>
+            <TouchableOpacity
+              className="bg-gray-200 w-12 h-12 rounded-full items-center justify-center shadow"
+              accessibilityRole="button"
+              accessible={true}
+              accessibilityLabel="Login with Google"
+            >
+              <Text className="text-lg font-bold text-gray-700">G</Text>
             </TouchableOpacity>
-        </View>
+          </View>
 
-          <Text className="text-sm text-gray-600 mb-6 text-center">
+          <Text
+            className="text-sm text-gray-600 mb-6 text-center"
+            accessible={true}
+            accessibilityLabel="or use your email account"
+          >
             or use your email account
           </Text>
 
@@ -70,27 +100,56 @@ const LoginScreen = ({navigateTo}) => {
               className="w-full h-12 border border-gray-300 rounded-lg px-4 text-gray-800 mb-3"
               placeholder="Email"
               placeholderTextColor="#aaa"
+              keyboardType="email-address"
+              accessible={true}
+              accessibilityLabel="Email input field"
+              accessibilityHint="Enter your email address"
             />
             <TextInput
               className="w-full h-12 border border-gray-300 rounded-lg px-4 text-gray-800"
               placeholder="Password"
               secureTextEntry
               placeholderTextColor="#aaa"
+              accessible={true}
+              accessibilityLabel="Password input field"
+              accessibilityHint="Enter your password"
             />
           </View>
 
-          {/* Register Button */}
-          <TouchableOpacity className="w-full h-12 bg-green-500 rounded-lg items-center justify-center">
+          {/* Login Button */}
+          <TouchableOpacity
+            className="w-full h-12 bg-green-500 rounded-lg items-center justify-center"
+            accessibilityRole="button"
+            accessible={true}
+            accessibilityLabel="Login button"
+            accessibilityHint="Double tap to log in"
+          >
             <Text className="text-white text-lg font-bold">LOGIN</Text>
           </TouchableOpacity>
 
           {/* Footer */}
-          <Text className="text-sm text-gray-600 text-center mt-4">
+          <Text
+            className="text-sm text-gray-600 text-center mt-4"
+            accessible={true}
+            accessibilityLabel="Sign up option"
+          >
             Don't have an account?{" "}
+<<<<<<< HEAD
             <TouchableOpacity onPress={() => navigateTo("SignUp")}>
                 <Text className="text-green-500 font-bold">SignUp</Text>
             </TouchableOpacity>
             
+=======
+            <Text
+              className="text-green-500 font-bold"
+              accessibilityRole="link"
+              accessible={true}
+              accessibilityLabel="Sign up link"
+              accessibilityHint="Double tap to navigate to sign up page"
+            >
+              SignUp
+            </Text>
+>>>>>>> d6cc3e0 (Updated file with changes added accessibility features)
           </Text>
         </View>
       </ScrollView>
