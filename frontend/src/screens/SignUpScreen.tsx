@@ -13,7 +13,7 @@ import {
 
 const { width } = Dimensions.get("window");
 
-const SignUpScreen = () => {
+const SignUpScreen = ({ navigateTo }) => {
   return (
     <KeyboardAvoidingView
       className="flex-1"
@@ -127,14 +127,12 @@ const SignUpScreen = () => {
 
           {/* Footer */}
           <Text className="text-sm text-gray-600 text-center mt-4">
-            Already have an account?{" "}
-            <Text
-              className="text-green-500 font-bold"
-              accessibilityRole="link"
-              accessibilityLabel="Navigate to login screen"
-            >
-              Login here
-            </Text>
+            Already have an account?{' '}
+            <TouchableOpacity onPress={() => navigateTo("Login")}>
+              <Text className="text-green-500 font-bold" accessibilityRole="link">
+                Login here
+              </Text>
+            </TouchableOpacity>
           </Text>
         </View>
       </ScrollView>
