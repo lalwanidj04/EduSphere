@@ -13,7 +13,11 @@ import {
 
 const { width } = Dimensions.get("window");
 
-const LoginScreen = ({navigateTo}) => {
+interface LoginScreenProps {
+  navigateTo: (screen: string) => void;
+}
+
+const LoginScreen = ({ navigateTo }: LoginScreenProps) => {
   return (
     <KeyboardAvoidingView
       className="flex-1"
@@ -26,7 +30,7 @@ const LoginScreen = ({navigateTo}) => {
         className="flex-1 bg-white"
         keyboardShouldPersistTaps="handled"
       >
-        {/* Top Image */}
+        {/* Background Image */}
         <Image
           source={require("../../assets/images/loginscreen2.jpg")}
           style={{
@@ -41,14 +45,14 @@ const LoginScreen = ({navigateTo}) => {
           accessibilityLabel="Background image of the login screen"
         />
 
-        {/* Main Container */}
+        {/* Main Login Container */}
         <View
-          className="flex-1 bg-gray-100 rounded-t-3xl shadow-lg px-6 pt-8 pb-6 mt-[50%]"
+          className="flex-1 bg-gray-100 rounded-t-3xl shadow-lg px-6 pt-8 pb-6"
           style={{ marginTop: width * 0.65 }}
           accessible={true}
           accessibilityLabel="Login form section"
         >
-          {/* Title */}
+          {/* Welcome Text */}
           <Text
             className="text-2xl font-bold text-gray-800 mb-6 text-center"
             accessibilityRole="header"
@@ -97,7 +101,7 @@ const LoginScreen = ({navigateTo}) => {
           {/* Input Fields */}
           <View className="space-y-4 mb-6">
             <TextInput
-              className="w-full h-12 border border-gray-300 rounded-lg px-4 text-gray-800 mb-3"
+              className="w-full h-12 border border-gray-300 rounded-lg px-4 text-gray-800"
               placeholder="Email"
               placeholderTextColor="#aaa"
               keyboardType="email-address"
@@ -127,30 +131,21 @@ const LoginScreen = ({navigateTo}) => {
             <Text className="text-white text-lg font-bold">LOGIN</Text>
           </TouchableOpacity>
 
-          {/* Footer */}
-          <Text
-            className="text-sm text-gray-600 text-center mt-4"
-            accessible={true}
-            accessibilityLabel="Sign up option"
-          >
-            Don't have an account?{" "}
-<<<<<<< HEAD
+          {/* Sign Up Option */}
+          <View className="flex-row justify-center mt-4">
+            <Text className="text-sm text-gray-600">Don't have an account? </Text>
             <TouchableOpacity onPress={() => navigateTo("SignUp")}>
-                <Text className="text-green-500 font-bold">SignUp</Text>
+              <Text
+                className="text-green-500 font-bold"
+                accessibilityRole="link"
+                accessible={true}
+                accessibilityLabel="Sign up link"
+                accessibilityHint="Double tap to navigate to sign up page"
+              >
+                SignUp
+              </Text>
             </TouchableOpacity>
-            
-=======
-            <Text
-              className="text-green-500 font-bold"
-              accessibilityRole="link"
-              accessible={true}
-              accessibilityLabel="Sign up link"
-              accessibilityHint="Double tap to navigate to sign up page"
-            >
-              SignUp
-            </Text>
->>>>>>> d6cc3e0 (Updated file with changes added accessibility features)
-          </Text>
+          </View>
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
