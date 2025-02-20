@@ -48,7 +48,7 @@ const HomeScreen = ({ navigateTo }: HomeScreenProps) => {
           accessibilityLabel="Login button"
           accessibilityHint="Tap to go to the login screen"
         >
-          <Text className="text-white text-xl text-center w-full">Login</Text>
+          <Text className="tex`t-white text-xl text-center w-full">Login</Text>
         </TouchableOpacity>
 
         {/* Overlapping SignUp Button */}

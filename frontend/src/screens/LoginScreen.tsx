@@ -13,7 +13,11 @@ import {
 
 const { width } = Dimensions.get("window");
 
-const LoginScreen = ({ navigateTo }) => {
+interface LoginScreenProps {
+  navigateTo: (screen: string) => void;
+}
+
+const LoginScreen = ({ navigateTo } : LoginScreenProps) => {
   return (
     <KeyboardAvoidingView
       className="flex-1"
@@ -123,6 +127,7 @@ const LoginScreen = ({ navigateTo }) => {
             accessible={true}
             accessibilityLabel="Login button"
             accessibilityHint="Double tap to log in"
+            onPress={() => navigateTo("Content")}
           >
             <Text className="text-white text-lg font-bold">LOGIN</Text>
           </TouchableOpacity>

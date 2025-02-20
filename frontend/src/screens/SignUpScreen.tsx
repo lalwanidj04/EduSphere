@@ -13,7 +13,11 @@ import {
 
 const { width } = Dimensions.get("window");
 
-const SignUpScreen = ({ navigateTo }) => {
+interface SignUpScreenProps {
+  navigateTo: (screen: string) => void;
+}
+
+const SignUpScreen = ({ navigateTo }: SignUpScreenProps) => {
   return (
     <KeyboardAvoidingView
       className="flex-1"
@@ -121,6 +125,7 @@ const SignUpScreen = ({ navigateTo }) => {
             className="w-full h-12 bg-green-500 rounded-lg items-center justify-center"
             accessibilityRole="button"
             accessibilityLabel="Register your account"
+            onPress={() => navigateTo("Login")}
           >
             <Text className="text-white text-lg font-bold">REGISTER</Text>
           </TouchableOpacity>
