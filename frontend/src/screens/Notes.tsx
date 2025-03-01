@@ -7,14 +7,14 @@ import { supabase } from "../../supabase";
 const subjects = ["DSA", "OS", "AI", "ML", "CN", "DBMS", "TOC", "SE", "Compiler", "Cyber Security", "Cloud Computing"];
 
 const Notes = () => {
-  const [selectedSubject, setSelectedSubject] = useState(null);
-  const [files, setFiles] = useState({});
+  const [selectedSubject, setSelectedSubject] = useState<string>("");
+  const [files, setFiles] = useState<{ [key: string]: any[] }>({});
   const [modalVisible, setModalVisible] = useState(false);
   const [uploadModalVisible, setUploadModalVisible] = useState(false);
   const [loading, setLoading] = useState(false);
 
   // Fetch files for a subject from Supabase
-  const fetchFiles = async (subject) => {
+  const fetchFiles = async (subject: string) => {
     const { data, error } = await supabase.storage.from("pdf-notes").list(subject);
     if (error) {
       console.error("Error fetching files:", error);
