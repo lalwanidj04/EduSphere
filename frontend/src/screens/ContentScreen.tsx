@@ -9,8 +9,11 @@ import {
 } from "react-native";
 
 const { width } = Dimensions.get('window');
-
-const ContentScreen = () => {
+interface ContentScreenProps {
+    navigateTo: (screen: string) => void;
+  }
+  
+const ContentScreen = ({ navigateTo }: ContentScreenProps) => {
   return (
     <ScrollView
         contentContainerStyle={{ flexGrow: 1 }}
@@ -136,7 +139,9 @@ const ContentScreen = () => {
                 alignItems: 'center',
                 marginBottom: 15,
                 borderRadius: 10,
-            }}>
+                
+            }}
+            onPress={() => navigateTo("Notes")}>
                 <Image 
                     source={require('../../assets/images/note4.jpg')}
                     style={{
