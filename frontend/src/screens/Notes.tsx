@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Modal, FlatList, Button, Alert } from "react-native";
+import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Modal, FlatList, Button, Alert, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import * as DocumentPicker from "expo-document-picker";
-import { supabase } from "../../supabase"; 
+import { supabase } from "../../supabase";
 
 const subjects = ["DSA", "OS", "AI", "ML", "CN", "DBMS", "TOC", "SE", "Compiler", "Cyber Security", "Cloud Computing"];
 
@@ -64,12 +64,19 @@ const Notes = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Notes</Text>
+      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <Image 
+          source={require('../../assets/images/note.png')} 
+          style={{ height: 70, width: 70, marginRight: 10, marginLeft: 80 }} 
+        />
+        <Text style={[styles.header, { color: "black" }, { fontSize: 25 }]}>Notes</Text>
+      </View>
+
       <ScrollView showsVerticalScrollIndicator={false}>
         {subjects.map((subject, index) => (
           <TouchableOpacity
             key={index}
-            style={[styles.subjectBox, { backgroundColor: getRandomColor() }]}
+            style={[styles.subjectBox, { backgroundColor: getRotatingColor(index) }]}
             onPress={() => {
               setSelectedSubject(subject);
               setModalVisible(true);
@@ -93,8 +100,8 @@ const Notes = () => {
 
       {/* Modal to Show Files */}
       <Modal visible={modalVisible} animationType="slide" transparent>
-        <View style={styles.modalContainer}>
-          <Text style={styles.modalTitle}>{selectedSubject}</Text>
+        <View style={styles.fileModalContainer}>
+          <Text style={styles.fileModalTitle}>{selectedSubject}</Text>
           <FlatList
             data={files[selectedSubject] || []}
             keyExtractor={(item, index) => index.toString()}
@@ -113,40 +120,64 @@ const Notes = () => {
 
       {/* Upload File Modal */}
       <Modal visible={uploadModalVisible} animationType="slide" transparent>
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <Text style={styles.modalTitle}>Upload File</Text>
-            <Text>Select Subject:</Text>
-            <ScrollView style={styles.dropdown}>
-              {subjects.map((subject, index) => (
-                <TouchableOpacity
-                  key={index}
-                  style={[styles.dropdownItem, selectedSubject === subject && styles.selectedSubject]}
-                  onPress={() => setSelectedSubject(subject)}
-                >
-                  <Text>{subject}</Text>
-                </TouchableOpacity>
-              ))}
-            </ScrollView>
-            <Button title="Choose File" onPress={uploadFile} disabled={!selectedSubject || loading} />
-            <Button title="Close" onPress={() => setUploadModalVisible(false)} />
-          </View>
-        </View>
-      </Modal>
+  <View style={styles.modalContainer}>
+    <View style={styles.modalContent}>
+      <Text style={styles.modalTitle}>Upload File</Text>
+      <Text>Select Subject:</Text>
+      <ScrollView style={styles.dropdown}>
+        {subjects.map((subject, index) => (
+          <TouchableOpacity
+            key={index}
+            style={[
+              styles.dropdownItem,
+              selectedSubject === subject && styles.selectedSubject,
+            ]}
+            onPress={() => setSelectedSubject(subject)}
+          >
+            <Text>{subject}</Text>
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
+
+      {/* Styled Choose File Button */}
+      <TouchableOpacity 
+        style={[styles.button, !selectedSubject || loading ? styles.buttonDisabled : {}]} 
+        onPress={uploadFile} 
+        disabled={!selectedSubject || loading}
+      >
+        <Text style={styles.buttonText}>Choose File</Text>
+      </TouchableOpacity>
+
+      {/* Styled Close Button */}
+      <TouchableOpacity 
+        style={styles.closeButton} 
+        onPress={() => setUploadModalVisible(false)}
+      >
+        <Text style={styles.buttonText}>Close</Text>
+      </TouchableOpacity>
+    </View>
+  </View>
+</Modal>
+
     </View>
   );
 };
 
-const getRandomColor = () => {
-  const colors = ["#FF6B6B", "#4CAF50", "#C4E538", "#48C9B0", "#8E44AD", "#F1C40F", "#3498DB"];
-  return colors[Math.floor(Math.random() * colors.length)];
+const getRotatingColor = (index) => {
+  //const colors = ["#BAD0E7","#B3C1DC","#93A1C8","#788bb3", "#4c587e"];
+  const colors = ["#BBB7E5","#DAE9FA","#F7DFDF","#EFBDBD", "#B6C687", "#F3EDBD"];
+  return colors[index % colors.length]; 
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#F8F9FA", padding: 20 },
+  container: { flex: 1, backgroundColor: "#FAF8F5", padding: 20 },
   header: { fontSize: 24, fontWeight: "bold", marginBottom: 20, textAlign: "center" },
-  subjectBox: { padding: 20, marginVertical: 10, borderRadius: 15, alignItems: "center", elevation: 3 },
-  subjectText: { fontSize: 20, fontWeight: "bold", color: "white" },
+  subjectBox: { 
+    padding: 20, marginVertical: 10, borderRadius: 15, alignItems: "center", 
+    elevation: 3, height: 100, alignContent: 'center', justifyContent: 'center', 
+    borderWidth: 2, borderColor: '#647593' 
+  },
+  subjectText: { fontSize: 20, fontWeight: "bold", color: "black" },
   floatingButton: {
     position: "absolute",
     bottom: 20,
@@ -159,17 +190,44 @@ const styles = StyleSheet.create({
     alignItems: "center",
     elevation: 5,
   },
-  modalContainer: { flex: 1, backgroundColor: "white", padding: 20, justifyContent: "center", alignItems: "center" },
-  modalContent: { width: "100%", padding: 20, backgroundColor: "white", borderRadius: 10, elevation: 5 },
-  modalTitle: { fontSize: 24, fontWeight: "bold", marginBottom: 10 },
+  modalContainer: { flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.5)', padding: 20, justifyContent: "center", alignItems: "center" },
+  modalContent: { width: "85%", padding: 20, backgroundColor: "white", borderRadius: 10, elevation: 5,alignItems: 'center',shadowColor: '#000',
+                  shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.3, shadowRadius: 4, },
+  modalTitle: { fontSize: 20, fontWeight: "bold", marginBottom: 10,},
   fileItem: { flexDirection: "row", alignItems: "center", marginVertical: 5 },
   fileEmoji: { fontSize: 24, marginRight: 10 },
   fileText: { fontSize: 18 },
-  closeButton: { marginTop: 20, backgroundColor: "red", padding: 10, borderRadius: 10 },
   closeText: { color: "white", fontWeight: "bold" },
-  dropdown: { maxHeight: 200, borderWidth: 1, borderColor: "#ccc", marginVertical: 10 },
+  dropdown: { width: '100%', maxHeight:150, borderWidth: 1, borderColor: "#ccc", marginVertical: 10 },
   dropdownItem: { padding: 10, borderBottomWidth: 1, borderBottomColor: "#ccc" },
   selectedSubject: { backgroundColor: "#A3E4D7" },
+  button: {
+    width: '100%',
+    backgroundColor: '#ABC4FF',
+    paddingVertical: 12,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginVertical: 8,
+  },
+  closeButton: {
+    width: '100%',
+    backgroundColor: '#FF7043',
+    paddingVertical: 12,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginVertical: 8,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  buttonDisabled: {
+    backgroundColor: '#AAB7B8',
+  },
+  fileModalContainer: { flex: 1, backgroundColor: 'white', padding: 20, },
+  fileModalTitle: { fontSize: 24, fontWeight: "bold", marginBottom: 20, textAlign: "center" },
+  
 });
 
 export default Notes;
