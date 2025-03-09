@@ -171,7 +171,7 @@ const ContentScreen = ({ navigateTo }: ContentScreenProps) => {
                 alignItems: 'center',
                 marginBottom: 15,
                 borderRadius: 10,
-            }}>
+            }} onPress={() => navigateTo("GameHome")}>
                 <Image 
                     source={require('../../assets/images/game2.jpg')}
                     style={{
