@@ -1,6 +1,11 @@
+import React from "react";
 import { View, Text, ImageBackground, TouchableOpacity } from "react-native";
 
-const GameHomeScreen = ({navigateTo}) => {
+interface GameHomeScreenProps {
+  navigateTo: (screen: string) => void;
+}
+
+const GameHomeScreen: React.FC<GameHomeScreenProps> = ({ navigateTo }) => {
   return (
     <ImageBackground
       source={require("../../assets/images/GameBG.jpg")}

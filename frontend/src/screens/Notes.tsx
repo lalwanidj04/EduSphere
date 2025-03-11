@@ -160,6 +160,7 @@ const Notes = () => {
 </Modal>
 
     </View>
+    
   );
 };
 

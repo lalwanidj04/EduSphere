@@ -7,6 +7,7 @@ import {
     ScrollView,
     TouchableOpacity,
 } from "react-native";
+import BottomNavigation from './BottomNavigation';
 
 const { width } = Dimensions.get('window');
 interface ContentScreenProps {
@@ -79,7 +80,8 @@ const ContentScreen = ({ navigateTo }: ContentScreenProps) => {
                 alignItems: 'center',
                 marginBottom: 15, 
                 borderRadius: 10, 
-            }}>
+            }}
+            onPress={() => navigateTo("Module")}>
                 <Image 
                     source={require('../../assets/images/module2.jpg')}
                     style={{
@@ -92,6 +94,7 @@ const ContentScreen = ({ navigateTo }: ContentScreenProps) => {
                         shadowRadius: 10,
                         elevation: 10,
                     }}
+                    
                 />                
                 <Text 
                     style={{ 
@@ -109,7 +112,8 @@ const ContentScreen = ({ navigateTo }: ContentScreenProps) => {
                 alignItems: 'center',
                 marginBottom: 15,
                 borderRadius: 10,
-            }}>
+            }}
+            onPress={() => navigateTo("TextSummarize")}>
                 <Image 
                     source={require('../../assets/images/summarizer1.jpg')}
                     style={{
@@ -122,6 +126,7 @@ const ContentScreen = ({ navigateTo }: ContentScreenProps) => {
                         shadowRadius: 10,
                         elevation: 10,
                     }}
+                    
                 />
                 <Text 
                 style={{ 
@@ -196,40 +201,7 @@ const ContentScreen = ({ navigateTo }: ContentScreenProps) => {
         </View>
 
         {/* Bottom Navigation: Home, Profile, Setting */}
-        <View
-            style={{
-                position: 'absolute',
-                bottom: 6,
-                left: 0,
-                right: 0,
-                flexDirection: 'row',
-                justifyContent: 'space-around',
-                backgroundColor: '#f1f1f9',
-            }}
-        >
-            <TouchableOpacity>
-                <Text style={{ fontSize: 30, fontWeight: 'bold', color: '#333',}}>🏠</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={{
-                height: 15,
-                justifyContent: 'center',
-                alignItems: 'center',
-            }}>
-                <Image 
-                    source={require('../../assets/images/bot4.jpg')}
-                    style={{
-                        width: 80,
-                        height: 80,
-                        borderRadius: 50,
-                        borderColor: '#ffffff',
-                        borderWidth: 5,
-                    }}
-                />
-            </TouchableOpacity>
-            <TouchableOpacity>
-                <Text style={{ fontSize: 30, fontWeight: 'bold', color: '#333' }}>👤</Text>
-            </TouchableOpacity>
-        </View>
+        <BottomNavigation navigateTo={navigateTo} />
 
     </ScrollView>
   );
